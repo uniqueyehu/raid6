@@ -1,0 +1,21 @@
+obj-m := ldgftable.o
+hell-objs := ldgftable.o
+
+.PHONY: all clean
+
+KERNELDIR := /lib/modules/$(shell uname -r)/build
+PWD  := $(shell pwd)
+
+all:
+	$(MAKE) clean
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+
+clean:
+	rm .*.cmd -rf
+	rm .tmp* -rf
+	rm *.o -rf
+	rm *.mod.* -rf
+	rm *.ko -rf
+	@rm *.symvers -f
+	@rm *.order -f
+	echo "Delete output files"
